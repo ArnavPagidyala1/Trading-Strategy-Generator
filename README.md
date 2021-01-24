@@ -1,4 +1,4 @@
-# tradingAlgorithm
+# Trading Strategy Generator
 
 This trading algorithm looks back on certain time periods of trading data(closing prices) to find out when it's best to buy or sell shares
 
