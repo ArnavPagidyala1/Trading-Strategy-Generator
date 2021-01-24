@@ -8,19 +8,17 @@ import datetime
 def stock(symbol, start, end):
     print("getting data")
     try:
-        stock = quandl.get("WIKI/" + symbol, start_date=start + "-10-1", end_date=end +"-10-1")
+        stock = quandl.get("WIKI/" + symbol, start_date=start + "-1-1", end_date=end +"-12-31")
+        # stock = pd.read_csv("data/AAPL.csv", header=0, index_col="Date", parse_dates=True)
     except:
         print("Please enter a stock symbol, or check if a correct year was entered")
 
-    # incase a spreadsheet is preferred
+    # Incase data wants to be saved
     # stock.to_csv("data/"+symbol+".csv")
     # df = pd.read_csv("data/"+symbol+".csv", header=0, index_col="Date", parse_dates=True)
 
     # Difference will be important in teaching algorthim how to buy and sell
     stock['diff'] = stock.Open - stock.Close
-
-    # stock["Close"].plot(grid=True)
-    # plt.show()
 
     # Trading strategy
     # making a short and long moving average
@@ -57,8 +55,12 @@ def stock(symbol, start, end):
     plt.show()
 
 
-symbolInput = input("What stock symbol would you like to analyze?")
+symbolInput = input("What stock symbol would you like to analyze?").upper()
 start_date = input("What year would you like to start at?")
 end_date = input("What year would you like to end?")
+
+while(end_date < start_date):
+    print("please make sure the end year is greater than or equal to the start year")
+    end_date = input("What year would you like to end?")
 
 stock(symbolInput, start_date, end_date)
